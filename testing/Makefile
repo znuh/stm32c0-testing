@@ -7,6 +7,7 @@ CFILES = testing.c
 #AFILES += api-asm.S
 
 DEVICE=stm32f042k6t6
+#DEVICE=stm32c071kbt6
 #OOCD_FILE = board/stm32f4discovery.cfg
 
 # You shouldn't have to edit anything below here.
