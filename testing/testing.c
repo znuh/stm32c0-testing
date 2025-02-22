@@ -1,7 +1,6 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 
-#if 0
 // for DFU bootrom reactivation
 #include <libopencm3/stm32/flash.h>
 #include <libopencmsis/core_cm3.h>
@@ -34,7 +33,6 @@ static void erase_page0(uint32_t safety_key) {
 	flash_wait_for_last_operation();
 	erase0_ram_func();
 }
-#endif
 
 int main(void) {
 	rcc_periph_clock_enable(RCC_GPIOB);
@@ -43,13 +41,11 @@ int main(void) {
 	gpio_mode_setup(GPIOB, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO8);
 
 	while(1) {
-		//for(uint32_t v=1000000;v;v--) {}
-		//gpio_toggle(GPIOB, GPIO8);
+		for(uint32_t v=1000000;v;v--)
+			__asm__("nop");
+		gpio_toggle(GPIOB, GPIO8);
 		if(gpio_get(GPIOB, GPIO9))
-			gpio_set(GPIOB, GPIO8);
-			//erase_page0(0xAA55);
-		else
-			gpio_clear(GPIOB, GPIO8);
+			erase_page0(0xAA55);
 	}
 	return 0;
 }
