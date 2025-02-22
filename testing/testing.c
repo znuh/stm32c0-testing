@@ -35,6 +35,9 @@ static void erase_page0(uint32_t safety_key) {
 }
 
 int main(void) {
+	/* switch from 12MHz (div=4, default) to 48MHz (div=1) */
+	rcc_clock_setup(RCC_CLOCK_CONFIG_HSI_48MHZ);
+
 	rcc_periph_clock_enable(RCC_GPIOB);
 	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO9);
 	gpio_set_output_options(GPIOB, GPIO_OTYPE_PP, GPIO_OSPEED_LOW, GPIO8);
