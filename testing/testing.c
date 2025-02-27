@@ -61,7 +61,7 @@ static void u2tx(const char *s) {
 
 int main(void) {
 	/* switch from 12MHz (div=4, default) to 48MHz (div=1) */
-	rcc_clock_setup(&rcc_clock_config[RCC_CLOCK_CONFIG_HSI_48MHZ]);
+	rcc_clock_setup_in_hsi48_out_48mhz();
 
 	usart_init();
 	u2tx("HENLO!11\r\n");
